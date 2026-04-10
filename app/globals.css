@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 162 100% 42%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 222 47% 14%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 222 47% 14%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 162 100% 42%;
+    --accent-foreground: 222 47% 6%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 222 47% 16%;
+    --input: 222 47% 14%;
+    --ring: 162 100% 42%;
+    --radius: 0.75rem;
+    --chart-1: 162 100% 42%;
+    --chart-2: 200 80% 55%;
+    --chart-3: 270 70% 65%;
+    --chart-4: 45 90% 60%;
+    --chart-5: 0 84% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(222 47% 9%);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(222 47% 20%);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(162 100% 42% / 0.6);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(13, 21, 38, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .glass-card {
+    background: rgba(17, 28, 53, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .green-glow {
+    box-shadow: 0 0 30px rgba(0, 212, 170, 0.15), 0 0 60px rgba(0, 212, 170, 0.05);
+  }
+  .green-glow-sm {
+    box-shadow: 0 0 12px rgba(0, 212, 170, 0.2);
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #00D4AA 0%, #55EFC4 50%, #00B8D9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .shimmer-bg {
+    background: linear-gradient(
+      90deg,
+      hsl(222 47% 14%) 25%,
+      hsl(222 47% 18%) 50%,
+      hsl(222 47% 14%) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200;
+  }
+  .nav-item-active {
+    @apply bg-brand-green/10 text-brand-green border border-brand-green/20;
+  }
+  .nav-item-inactive {
+    @apply text-muted-foreground hover:text-foreground hover:bg-white/5;
+  }
+}
+
+/* Custom RainbowKit overrides */
+[data-rk] {
+  --rk-colors-accentColor: #00D4AA !important;
+  --rk-colors-accentColorForeground: #0A0F1E !important;
+  --rk-colors-modalBackground: #0D1526 !important;
+  --rk-colors-modalBorder: rgba(255,255,255,0.07) !important;
+  --rk-colors-modalText: #F0F4FF !important;
+  --rk-colors-modalTextDim: #8896B0 !important;
+  --rk-colors-connectButtonBackground: #00D4AA !important;
+  --rk-colors-connectButtonText: #0A0F1E !important;
+  --rk-radii-connectButton: 12px !important;
+}
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}

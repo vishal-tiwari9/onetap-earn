@@ -1,0 +1,37 @@
+{
+  "name": "OneTap Earn",
+  "short_name": "OneTap",
+  "description": "DeFi yield aggregator powered by LI.FI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0F1E",
+  "theme_color": "#0A0F1E",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["finance", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Get Yield",
+      "url": "/dashboard/get-yield",
+      "description": "Browse yield vaults"
+    },
+    {
+      "name": "Ask AI",
+      "url": "/dashboard/ask-ai",
+      "description": "AI yield advisor"
+    }
+  ]
+}
