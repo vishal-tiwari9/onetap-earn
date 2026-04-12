@@ -18,9 +18,9 @@ import { useAppStore } from "@/store";
 
 const NAV_ITEMS = [
   { href: "/dashboard/home", icon: LayoutDashboard, label: "Dashboard" },
-  { href: "/dashboard/ask-ai", icon: Bot, label: "Ask AI" },
+  // { href: "/dashboard/ask-ai", icon: Bot, label: "Ask AI" },
   { href: "/dashboard/get-yield", icon: Layers, label: "Get Yield" },
-  { href: "/dashboard/portfolio", icon: Wallet, label: "Portfolio" },
+  //{ href: "/dashboard/portfolio", icon: Wallet, label: "Portfolio" },
 ];
 
 export function Sidebar() {
