@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { fetchVaults, getMockVaults, type Vault, type VaultFilters } from "@/lib/lifi";
+import { fetchVaults, type Vault, type VaultFilters } from "@/lib/lifi";
 
 interface UseVaultsResult {
   vaults: Vault[];
@@ -8,6 +8,7 @@ interface UseVaultsResult {
   refetch: () => Promise<void>;
   totalTVL: number;
   avgAPY: number;
+  topAPY: number;
 }
 
 export function useVaults(filters: VaultFilters = {}): UseVaultsResult {
@@ -15,26 +16,28 @@ export function useVaults(filters: VaultFilters = {}): UseVaultsResult {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const filterKey = JSON.stringify(filters);
+
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       const data = await fetchVaults(filters);
-      setVaults(data.length ? data : getMockVaults());
+      setVaults(data);
     } catch (err) {
-      setError("Failed to fetch vaults. Showing demo data.");
-      setVaults(getMockVaults());
+      const msg = err instanceof Error ? err.message : "Failed to load vaults";
+      setError(msg);
+      setVaults([]);
     } finally {
       setLoading(false);
     }
-  }, [JSON.stringify(filters)]);
+  }, [filterKey]);
 
-  useEffect(() => {
-    load();
-  }, [load]);
+  useEffect(() => { load(); }, [load]);
 
   const totalTVL = vaults.reduce((s, v) => s + v.tvlUSD, 0);
   const avgAPY = vaults.length ? vaults.reduce((s, v) => s + v.apy, 0) / vaults.length : 0;
+  const topAPY = vaults.length ? Math.max(...vaults.map((v) => v.apy)) : 0;
 
-  return { vaults, loading, error, refetch: load, totalTVL, avgAPY };
+  return { vaults, loading, error, refetch: load, totalTVL, avgAPY, topAPY };
 }

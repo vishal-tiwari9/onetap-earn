@@ -114,7 +114,3 @@
   --rk-colors-connectButtonText: #0A0F1E !important;
   --rk-radii-connectButton: 12px !important;
 }
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
