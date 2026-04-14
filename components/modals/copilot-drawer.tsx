@@ -70,7 +70,10 @@ export function CopilotDrawer() {
       });
       const data = await res.json();
       // Strip VAULTS_JSON from copilot responses (they're contextual)
-      const cleanContent = (data.content || "I couldn't process that.").replace(/VAULTS_JSON:\[.*?\]/s, "").trim();
+      // Replace . with [\s\S] and remove the /s flag
+      const cleanContent = (data.content || "I couldn't process that.")
+        .replace(/VAULTS_JSON:\[[\s\S]*?\]/, "")
+        .trim();
       setMessages((prev) => [...prev, { id: Date.now().toString() + "a", role: "assistant", content: cleanContent }]);
     } catch {
       setMessages((prev) => [...prev, { id: "err", role: "assistant", content: "Network error. Please try again." }]);

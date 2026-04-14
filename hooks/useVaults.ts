@@ -9,7 +9,7 @@ interface UseVaultsResult {
   totalTVL: number;
   avgAPY: number;
   topAPY: number;
-  sortBy?: "apy" | "tvl";
+  sortBy?: "apy" | "tvl" | "risk-low";   
 }
 
 export function useVaults(filters: VaultFilters = {}): UseVaultsResult {

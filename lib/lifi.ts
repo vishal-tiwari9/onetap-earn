@@ -32,6 +32,7 @@ export interface Vault {
   description?: string;
   risk: string;
   logoURI?: string;
+  sortBy?: "apy" | "tvl" | "risk-low";  
 }
 
 export interface PortfolioPosition {
@@ -51,6 +52,7 @@ export interface VaultFilters {
   protocol?: string;
   category?: string;
   limit?: number;
+  SortBy?: "apy" | "tvl" | "risk-low";
 }
 
 // Deep-extract a string from any nested value

@@ -38,7 +38,7 @@ export default function DashboardHome() {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchVaults({ sortBy: "apy" });
+      const data = await fetchVaults({ SortBy: "apy" });
       setVaults(data);
 
       const totalTVL = data.reduce((s, v) => s + v.tvlUSD, 0);

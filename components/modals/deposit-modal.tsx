@@ -314,12 +314,12 @@ export function DepositModal() {
             </div>
             <div className="flex justify-between text-muted-foreground">
               <span>You pay</span>
-              <span className="text-foreground font-medium">{amount} {vault.asset.symbol}</span>
+              <span className="text-foreground font-medium">{amount} {vault.asset.symbol} on {fromChainName}</span>
             </div>
             <div className="flex justify-between text-muted-foreground">
               <span>Route</span>
               <span className="text-foreground font-medium">
-                {quote.toolDetails?.name ?? quote.tool ?? (isCrossChain ? "LI.FI Bridge" : "Direct")}
+                {(quote as any).toolDetails?.name ?? (quote as any).tool ?? (isCrossChain ? "LI.FI Bridge" : "Direct")}
               </span>
             </div>
             {gasCostUSD && (
