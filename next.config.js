@@ -2,8 +2,20 @@
 const nextConfig = {
   reactStrictMode: true,
 
-  // Next 15: serverExternalPackages (replaces serverComponentsExternalPackages)
+  // Next 15/16: serverExternalPackages
   serverExternalPackages: ["pino", "pino-pretty"],
+
+  // Tell Next.js 16 to allow Turbopack even with custom webpack
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        // This is how you handle fallbacks in Turbopack
+        fs: false,
+        net: false,
+        tls: false,
+      },
+    },
+  },
 
   webpack: (config) => {
     config.resolve.fallback = {
