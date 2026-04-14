@@ -11,7 +11,6 @@ import { CHAIN_NAMES } from "@/lib/lifi";
 import { formatAPY, formatCurrency, getRiskColor, getRiskDot, cn } from "@/lib/utils";
 import { useDeposit } from "@/hooks/useDeposit";
 import { toast } from "sonner";
-import { parseUnits } from "viem";
 
 // Chain → block explorer base URL
 const EXPLORERS: Record<number, string> = {
@@ -89,57 +88,14 @@ export function DepositModal() {
     setQuoteFetched(false);
   };
 
-const handleGetQuote = async () => {
-  if (!amount || Number(amount) <= 0) {
-    toast.error("Please enter a valid amount");
-    return;
-  }
-
-  const BASE_USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"; // Base USDC
-
-  try {
-    const decimals = vault.asset.decimals || 6;
-    const amountInWei = parseUnits(amount, decimals).toString();
-
-    const q = await getQuote({
-      fromChain: chainId,
-      toChain: vault.chainId,
-      fromToken: BASE_USDC,
-      toToken: vault.address,           // ← Vault contract address
-      fromAmount: amountInWei,
-      fromAddress: address || "",
-    });
-
-    if (q) {
-      setQuoteFetched(true);
-      toast.success("Quote ready! Review and sign in wallet.");
+  const handleGetQuote = async () => {
+    if (!amount || Number(amount) <= 0) {
+      toast.error("Enter a valid amount");
+      return;
     }
-  } catch (err: any) {
-    console.error("Quote error:", err);
-
-    // Fallback to native token (ETH)
-    try {
-      const amountInWei = parseUnits(amount, 18).toString();
-
-      const q = await getQuote({
-        fromChain: chainId,
-        toChain: vault.chainId,
-        fromToken: "0x0000000000000000000000000000000000000000",
-        toToken: vault.address,
-        fromAmount: amountInWei,
-        fromAddress: address || "",
-      });
-
-      if (q) {
-        setQuoteFetched(true);
-        toast.info("Using native token as fallback.");
-      }
-    } catch (fallbackErr) {
-      console.error("Fallback also failed:", fallbackErr);
-      toast.error("Failed to get quote. Please try a smaller amount or different token.");
-    }
-  }
-};
+    const q = await getQuote(amount);
+    if (q) setQuoteFetched(true);
+  };
 
   const handleDeposit = () => execute();
 
@@ -298,6 +254,11 @@ const handleGetQuote = async () => {
         <div>
           <label className="text-xs text-muted-foreground mb-2 block font-medium">
             Amount · {vault.asset.symbol}
+            {isCrossChain && (
+              <span className="ml-1 text-blue-400">
+                (paying with {vault.asset.symbol} on {fromChainName})
+              </span>
+            )}
           </label>
           <div className="relative">
             <input

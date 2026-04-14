@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { TrendingUp, Shield, Zap, Globe, ArrowRight, Star } from "lucide-react";
+import FamewallEmbed from "@/components/FamewallEmbed";
 
 export default function LandingPage() {
   const { isConnected } = useAccount();
@@ -131,6 +132,121 @@ export default function LandingPage() {
           ))}
         </div>
       </section>
+      {/* What People Are Saying */}
+  {/* What People Are Saying - Real X Style */}
+{/* What People Are Saying - Exact X Style */}
+<section className="relative z-10 max-w-5xl mx-auto px-6 pb-24">
+  <div className="text-center mb-12">
+    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm mb-4">
+      <span className="text-[#1DA1F2]">𝕏</span> Real Feedback from the Community
+    </div>
+    <h2 className="text-4xl font-bold tracking-tight mb-3">What People Are Saying</h2>
+    <p className="text-muted-foreground">Honest reactions from DeFi Mullet Hackathon builders</p>
+  </div>
+
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {[
+      {
+        username: "tiwaridevesh",
+        handle: "@tiwaridevesh",
+        avatar: "/assets/tweets/devesh.png",
+        text: "@VishalT12094272 @lifiprotocol Crazy Idea bro ...i was literally waiting for such product ...let me know ..once its is live to use",
+        time: "10h ago",
+        likes: "4",
+        link: "https://x.com/tiwaridevesh/status/2043581020528840966"
+      },
+      {
+        username: "SahilYadav199",
+        handle: "@SahilYadav199",
+        avatar: "tweets/yadav-sahil.png",
+        text: "Damn this is actually a solid idea, nicely built!Comparing protocols in one place + AI guidance is actually super useful.",
+        time: "2h ago",
+        likes: "47",
+        link: "https://x.com/SahilYadav199/status/2043710350345003372"
+      },
+      {
+        username: "UTDSahil_",
+        handle: "@UTDSahil_",
+        avatar: "/public/tweets/utd_sahil.png",
+        text: "Cook",
+        time: "5h ago",
+        likes: "32",
+        link: "https://x.com/UTDSahil_/status/2043339410557837358"
+      },
+     {
+    username: "Abhishe59502815",
+    handle: "@Abhishe59502815",
+    avatar: "/tweets/abhishek.png",         // agar image ka naam alag hai toh change kar dena
+    text: "woohh! crazy idea making a platform unified for all protocols. Love to try it..",
+    time: "3h ago",
+    likes: "28",
+    link: "https://x.com/Abhishe59502815/status/2043692131353825767"
+  },
+  {
+    username: "ImDT29",
+    handle: "@ImDT29",
+    avatar: "/tweets/devesh.png",           // agar image ka naam alag hai toh change kar dena
+    text: "OneTap Earn made yield farming actually fun. No more jumping between 10 tabs. Connect → Ask AI → Deposit. Done.",
+    time: "4h ago",
+    likes: "41",
+    link: "https://x.com/ImDT29/status/2043581020528840966"
+  }
+    ].map((tweet, index) => (
+      <a
+        key={index}
+        href={tweet.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group block bg-[#1A1A24] border border-[#2A2A36] hover:border-[#3A3A46] rounded-3xl p-5 transition-all duration-200 hover:shadow-xl"
+      >
+        {/* Header - Exact X Style */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="relative">
+            <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center overflow-hidden ring-2 ring-white/10">
+              {/* Placeholder for avatar */}
+              <span className="text-white text-xl font-bold">𝕏</span>
+            </div>
+            {/* Green online dot like your screenshot */}
+            <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-green-500 rounded-full border-2 border-[#1A1A24]"></div>
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1.5">
+              <span className="font-bold text-white text-[15px] truncate">{tweet.username}</span>
+              <span className="text-[#1DA1F2] text-xs">✓</span>
+            </div>
+            <div className="text-[#71767B] text-sm">{tweet.handle}</div>
+          </div>
+
+          <div className="text-[#1DA1F2] text-2xl opacity-80">𝕏</div>
+        </div>
+
+        {/* Tweet Text - Exact font & spacing */}
+        <p className="text-[15px] leading-[1.4] text-white mb-5">
+          {tweet.text}
+        </p>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between text-xs text-[#71767B]">
+          <div>{tweet.time}</div>
+          <div className="flex items-center gap-5">
+            <div className="flex items-center gap-1">
+              ❤️ <span>{tweet.likes}</span>
+            </div>
+            <div>↻</div>
+            <div>💬</div>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+<section className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
+  <div className="text-center mb-10">
+  </div>
+
+  <FamewallEmbed />
+</section>
     </main>
   );
 }

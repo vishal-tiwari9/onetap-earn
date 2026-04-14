@@ -281,7 +281,7 @@ export default function AskAIPage() {
             <h1 className="font-bold text-lg">AI Yield Advisor</h1>
             <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
               <div className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
-              Live data · Groq llama-3.3-70b · LI.FI Earn API
+              
             </div>
           </div>
         </div>

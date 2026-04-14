@@ -32,7 +32,8 @@ export function CopilotDrawer() {
         {
           id: "welcome",
           role: "assistant",
-          content: `I can help you understand **${copilotVault.name}** by ${copilotVault.protocol}.\n\nThis vault currently offers **${formatAPY(copilotVault.apy)} APY** on ${copilotVault.asset.symbol} with ${formatCurrency(copilotVault.tvlUSD)} TVL.\n\nWhat would you like to know?`,
+          content: `I can help you understand 
+          **${copilotVault.name}** by ${copilotVault.protocol}.\n\nThis vault currently offers **${formatAPY(copilotVault.apy)} APY** on ${copilotVault.asset.symbol} with ${formatCurrency(copilotVault.tvlUSD)} TVL.\n\nWhat would you like to know?`,
         },
       ]);
     }

@@ -19,7 +19,9 @@ const SORT_OPTIONS = [
 ];
 
 export default function GetYieldPage() {
-  const { vaults, loading, error, refetch, totalTVL, avgAPY, topAPY } = useVaults({ sortBy: "apy" });
+  const { vaults, loading, error, refetch, totalTVL, avgAPY, topAPY } = useVaults({ 
+  sortBy: "apy" as const 
+});
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedChain, setSelectedChain] = useState("All");
