@@ -65,11 +65,13 @@ export function useDeposit(vault: Vault | null) {
       const decimals = vault.asset.decimals || 6;
       const amountInWei = parseUnits(amount, decimals).toString();
 
+      const BASE_USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
+
       const q = await getLifiQuote({
-        fromChain: chainId,               // User's current chain (Base)
-        toChain: vault.chainId,           // Vault's chain
-        fromToken: BASE_USDC,             // Force Base USDC
-        toToken: vault.address,           // ← Most Important: Vault contract address
+        fromChain: chainId,
+        toChain: vault.chainId,
+        fromToken: BASE_USDC,           // Force USDC
+        toToken: vault.address,         // ← Yeh line sabse important hai
         fromAmount: amountInWei,
         fromAddress: address,
       });
@@ -82,7 +84,7 @@ export function useDeposit(vault: Vault | null) {
       console.error("Quote failed:", err);
       const msg = err?.message || "Failed to get quote";
 
-      // Last fallback: native token
+      // Fallback
       try {
         const amountInWei = parseUnits(amount, 18).toString();
 
@@ -90,7 +92,7 @@ export function useDeposit(vault: Vault | null) {
           fromChain: chainId,
           toChain: vault.chainId,
           fromToken: "0x0000000000000000000000000000000000000000",
-          toToken: vault.address,
+          toToken: vault.address,           // ← Same fix
           fromAmount: amountInWei,
           fromAddress: address,
         });
@@ -99,8 +101,7 @@ export function useDeposit(vault: Vault | null) {
         setQuoteError("Used native token as fallback");
         setStatus("idle");
         return q as QuoteData;
-      } catch (fallbackErr: any) {
-        console.error("Fallback failed:", fallbackErr);
+      } catch (fallbackErr) {
         setQuoteError(msg);
         setStatus("idle");
         return null;
